@@ -71,4 +71,4 @@ Questo progetto è distribuito sotto licenza MIT. Puoi utilizzarlo, modificarlo 
 
 ---
 
-Per ulteriori dettagli, contributi o segnalazioni di bug, visita la pagina ufficiale del repository su GitHub.
+Creato da Nicolò Morinelli
