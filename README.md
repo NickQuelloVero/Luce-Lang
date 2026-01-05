@@ -1,7 +1,7 @@
 # 💡 Luce-Lang 💡
 <div align="center">
 
-  <img src="logo.png" alt="Luce Logo" width="150" height="150" />
+  <img src="logo.png" alt="Luce Logo" width="320" height="320" />
 </div>
 
 ## Introduzione
