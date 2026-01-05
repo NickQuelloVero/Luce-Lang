@@ -1,0 +1,33 @@
+app:
+    scrivi "=== STRESS TEST (NO GUI): SELECTION SORT ==="
+    numeri = [50, 150, 30, 180, 10, 100, 70, 190, 20, 120]
+    n = 10
+    scrivi "--- Lista Disordinata ---"
+    per x in numeri:
+        scrivi x
+    scrivi "--- Inizio Ordinamento ---"
+    i = 0
+    mentre i < n:
+        min_idx = i
+        j = i + 1
+        mentre j < n:
+            val_j = numeri[j]
+            val_min = numeri[min_idx]
+            
+            se val_j < val_min:
+                min_idx = j
+            
+            j = j + 1
+        temp = numeri[min_idx]
+        numeri[min_idx] = numeri[i]
+        numeri[i] = temp
+        modulo = i
+        mentre modulo >= 2:
+            modulo = modulo - 2
+        se modulo == 0:
+            scrivi "Ordinando indice..."
+            scrivi i
+        i = i + 1
+    scrivi "=== RISULTATO FINALE (Lista Ordinata) ==="
+    per num in numeri:
+        scrivi num

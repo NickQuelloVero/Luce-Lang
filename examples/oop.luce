@@ -1,0 +1,87 @@
+# === STRESS TEST PER LUCE v10.1 ===
+
+# 1. DEFINIZIONE CLASSE (OOP)
+classe Robot:
+    id = 0
+    livello = 1
+    nome = "Unit"
+
+# 2. DEFINIZIONE FUNZIONI
+funzione calcola_fibonacci(n):
+    # Calcola l'n-esimo numero di Fibonacci
+    a = 0
+    b = 1
+    i = 0
+    mentre i < n:
+        temp = a
+        a = b
+        b = temp + b
+        i = i + 1
+    ritorno a
+
+funzione analizza_numeri(lista):
+    somma = 0
+    max_val = 0
+    conta = 0
+    
+    scrivi "--- Analisi Vettore ---"
+    
+    per val in lista:
+        somma = somma + val
+        conta = conta + 1
+        se val > max_val:
+            max_val = val
+            
+    scrivi "Somma totale:"
+    scrivi somma
+    scrivi "Valore massimo trovato:"
+    scrivi max_val
+    ritorno somma
+
+# === MAIN PROGRAM ===
+scrivi ">>> INIZIO TEST SISTEMA LUCE <<<"
+
+# --- TEST 1: I/O e Matematica ---
+scrivi "Inserisci quanti numeri di Fibonacci calcolare (consigliato 10):"
+leggi target
+risultato = calcola_fibonacci(target)
+scrivi "Risultato Fibonacci:"
+scrivi risultato
+
+# --- TEST 2: Array Dinamici ---
+numeri = []
+scrivi "Quanti valori vuoi aggiungere al vettore?"
+leggi n_val
+k = 0
+
+mentre k < n_val:
+    scrivi "Inserisci numero:"
+    leggi temp_val
+    aggiungi temp_val a numeri
+    k = k + 1
+
+# Chiamata a funzione con passaggio di array
+totale = analizza_numeri(numeri)
+
+# --- TEST 3: Oggetti e Membri ---
+scrivi "--- Test OOP ---"
+
+# Istanziazione Oggetto (Sintassi C++ diretta supportata dal transpiler)
+Robot r1
+
+# Modifica attributi
+r1.id = 99
+r1.livello = 5
+
+scrivi "ID Robot:"
+scrivi r1.id
+scrivi "Livello Robot:"
+scrivi r1.livello
+
+# Controllo logico finale
+se r1.livello > 3:
+    scrivi "Il Robot e' di alto livello!"
+altrimenti:
+    scrivi "Il Robot e' ancora debole."
+
+scrivi ">>> TEST COMPLETATO CON SUCCESSO <<<"

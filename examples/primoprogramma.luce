@@ -1,0 +1,6 @@
+scrivi "Scrivi la tua eta: "
+leggi eta
+se eta >= 18:
+    scrivi "Puoi bere!!!"
+altrimenti:
+    scrivi "Non puoi bere!!!"  

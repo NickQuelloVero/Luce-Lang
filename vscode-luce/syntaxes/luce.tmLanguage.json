@@ -1,0 +1,93 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Luce",
+	"patterns": [
+		{ "include": "#comments" },
+		{ "include": "#strings" },
+		{ "include": "#numbers" },
+		{ "include": "#keywords" },
+		{ "include": "#functions" },
+		{ "include": "#classes" },
+		{ "include": "#variables" },
+		{ "include": "#operators" }
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.number-sign.luce",
+					"match": "#.*$"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.luce",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{ "name": "constant.character.escape.luce", "match": "\\\\." }
+			]
+		},
+		"numbers": {
+			"name": "constant.numeric.luce",
+			"match": "\\b\\d+(\\.\\d+)?\\b"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.luce",
+					"match": "\\b(se|allora|altrimenti|mentre|ripeti|per|in|volte|ritorno|importa|fine|app)\\b"
+				},
+				{
+					"name": "storage.type.luce",
+					"match": "\\b(classe|costruttore|funzione|nuovo)\\b"
+				},
+				{
+					"name": "keyword.other.luce",
+					"match": "\\b(aggiungi|a)\\b"
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"name": "support.function.builtin.luce",
+					"match": "\\b(scrivi|leggi)\\b"
+				},
+				{
+					"name": "entity.name.function.definition.luce",
+					"match": "(?<=funzione\\s)([a-zA-Z_][a-zA-Z0-9_]*)"
+				},
+				{
+					"name": "entity.name.function.call.luce",
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\\()"
+				}
+			]
+		},
+		"classes": {
+			"patterns": [
+				{
+					"name": "entity.name.type.class.luce",
+					"match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+				}
+			]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"name": "variable.other.assignment.luce",
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\\s*=[^=])"
+				},
+				{
+					"name": "variable.other.property.luce",
+					"match": "(?<=\\.)([a-zA-Z_][a-zA-Z0-9_]*)"
+				}
+			]
+		},
+		"operators": {
+			"name": "keyword.operator.luce",
+			"match": "(\\+|\\-|\\*|\\/|=|==|<|>|%|!|\\:|\\[|\\])"
+		}
+	},
+	"scopeName": "source.luce"
+}

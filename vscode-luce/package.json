@@ -1,0 +1,32 @@
+{
+  "name": "luce-lang",
+  "displayName": "Luce Language",
+  "description": "Supporto completo per il linguaggio Luce",
+  "version": "1.1.0",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "luce",
+      "aliases": ["Luce", "luce"],
+      "extensions": [".luce"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "luce",
+      "scopeName": "source.luce",
+      "path": "./syntaxes/luce.tmLanguage.json"
+    }],
+    "iconThemes": [
+      {
+        "id": "luce-icon-theme",
+        "label": "Luce Icons",
+        "path": "./icon-theme.json"
+      }
+    ]
+  }
+}

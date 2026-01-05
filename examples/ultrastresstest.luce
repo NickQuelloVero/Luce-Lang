@@ -1,0 +1,67 @@
+# --- DEFINIZIONE FUNZIONE ---
+# Deve essere definita prima dell'uso
+funzione verifica_primo(n):
+    # I numeri < 2 non sono primi
+    se n < 2:
+        ritorno 0
+    divisore = 2
+    limit = n / 2
+    # Ciclo per trovare divisori
+    mentre divisore < limit:
+        # Controllo se n e' divisibile per divisore
+        # Simuliamo l'operatore Modulo (%) con le sottrazioni
+        temp = n
+        # Sottrae finche' non diventa minore del divisore
+        mentre temp >= divisore:
+            temp = temp - divisore
+        # Se temp e' 0, vuol dire che la divisione era esatta -> Non Primo
+        se temp == 0:
+            ritorno 0   
+        divisore = divisore + 1 
+    # Se arriviamo qui, e' primo
+    ritorno 1
+# --- MAIN PROGRAM ---
+app:
+    scrivi "=== ULTRA STRESS TEST: MATRICE DEI NUMERI PRIMI ==="
+    # 1. Configurazione Matrice 5x5
+    rows = 5
+    cols = 5
+    totale_celle = 25
+    # 2. Inizializzazione Array Vuoto
+    griglia = []
+    # 3. Riempimento Array (Logica Primi)
+    candidato = 1
+    celle_trovate = 0
+    scrivi "Calcolo in corso (potrebbe richiedere tempo)..."
+    mentre celle_trovate < totale_celle:
+        candidato = candidato + 1
+        # Chiamata a funzione
+        is_p = verifica_primo(candidato)
+        se is_p == 1:
+            # SCRITTURA SU ARRAY (Stress Test: deve evitare 'auto')
+            # Qui stiamo usando push_back indiretto tramite aggiungi
+            aggiungi candidato a griglia
+            celle_trovate = celle_trovate + 1
+            # Feedback ogni 5 numeri
+            modulo_feed = celle_trovate
+            mentre modulo_feed >= 5:
+                modulo_feed = modulo_feed - 5
+            se modulo_feed == 0:
+                scrivi "Trovati 5 nuovi primi..."
+    scrivi "--- MATRICE RISULTANTE (5x5) ---"
+    # 4. Stampa come Griglia 2D (Lettura Array con Indice Calcolato)
+    r = 0
+    mentre r < rows:
+        scrivi "RIGA:"
+        c = 0
+        mentre c < cols:
+            # Calcolo Indice 1D da coordinate 2D: idx = r * cols + c
+            idx = r * cols
+            idx = idx + c
+            # LETTURA ARRAY (Stress Test: deve mettere 'auto' se val e' nuovo)
+            val = griglia[idx]
+            scrivi val
+            c = c + 1
+        scrivi "---"
+        r = r + 1
+    scrivi "=== TEST COMPLETATO ==="

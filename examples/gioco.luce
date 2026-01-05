@@ -1,0 +1,30 @@
+scrivi "=== ALGORITMO BUBBLE SORT ==="
+scrivi "Quanti numeri vuoi ordinare?"
+leggi n
+numeri = []
+scrivi "Inserisci i numeri uno alla volta (premi invio dopo ogni numero):"
+count = 0
+mentre count < n:
+    leggi valore
+    aggiungi valore a numeri
+    count = count + 1
+scrivi "--- Inizio Ordinamento ---"
+i = 0
+mentre i < n:
+    j = 0
+    limite = n - i - 1
+    mentre j < limite:
+        corrente = j
+        successivo = j + 1 
+        val_a = numeri[corrente]
+        val_b = numeri[successivo]
+        se val_a > val_b:
+            temp = numeri[corrente]
+            numeri[corrente] = numeri[successivo]
+            numeri[successivo] = temp
+        j = j + 1
+    i = i + 1
+scrivi "Ecco la lista ordinata:"
+per num in numeri:
+    scrivi num
+scrivi "--- Fine Programma ---"

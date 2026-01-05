@@ -1,0 +1,23 @@
+{
+
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""]
+    ],
+    "autoClosingPairs": [
+        { "open": "[", "close": "]" },
+        { "open": "(", "close": ")" },
+        { "open": "\"", "close": "\"", "notIn": ["string"] }
+    ],
+    "surroundingPairs": [
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""]
+    ],
+    "indentationRules": {
+        "increaseIndentPattern": "^\\s*(se|altrimenti|mentre|ripeti|funzione|classe|costruttore|app).*:\\s*$",
+        "decreaseIndentPattern": "^\\s*(altrimenti).*$"
+    }
+}
