@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -12,18 +10,14 @@
 
 using namespace std;
 
-
 enum BlockType { CLASS_BLOCK, FUNCTION_BLOCK, GENERIC_BLOCK };
 bool module_gui_active = false;
-
 
 stack<BlockType> blockStack;
 set<string> declared_variables; 
 
-// TODO: FAR FUNZIONARE IMPORTA GUI
 string getGuiModuleCode() {
     return R"====(
-    // === MOTORE GRAFICO LUCE ===
     #include <iostream>
     #include <string>
     #include <vector>
@@ -53,7 +47,6 @@ string getGuiModuleCode() {
     )====";
 }
 
-
 int getIndentLevel(const string& line) {
     int spaces = 0;
     for (char c : line) { if (c == ' ') spaces++; else break; }
@@ -80,7 +73,6 @@ vector<string> split(const string &s, char delimiter = ' ') {
 }
 
 string inferType(string value) {
-
     size_t first = value.find_first_not_of(' ');
     if (first != string::npos) value = value.substr(first);
 
@@ -113,8 +105,6 @@ pair<string, string> parseFunctionTemplate(string argsRaw) {
     return {templates, args};
 }
 
-
-
 string transpile(string sourceCode) {
     stringstream globalStream; 
     stringstream mainStream;   
@@ -144,7 +134,6 @@ string transpile(string sourceCode) {
     for (string line : lines) {
         if (line.empty()) continue;
 
-        // Gestione Commenti
         string codeOnly = line;
         string commentPart = "";
         bool inStr = false;
@@ -166,7 +155,6 @@ string transpile(string sourceCode) {
             if (hasComment) (*currentStream) << string(newIndent * 4, ' ') << "//" << commentPart.substr(1) << "\n";
             continue;
         }
-
 
         while (newIndent < currentIndent) {
             currentIndent--;
@@ -192,7 +180,6 @@ string transpile(string sourceCode) {
         if (words.empty()) continue;
         string cmd = words[0];
 
-
         if (newIndent == 0 && (cmd == "classe" || cmd == "funzione")) {
             currentStream = &globalStream;
             insideDefinition = true;
@@ -202,9 +189,8 @@ string transpile(string sourceCode) {
         currentIndent = newIndent;
 
 
-
         if (cmd == "importa") { (*currentStream) << "// Import header\n"; }
-        else if (cmd == "app") { /* Skip */ }
+        else if (cmd == "app") { }
         
         else if (cmd == "classe") { 
             declared_variables.clear(); 
@@ -235,7 +221,7 @@ string transpile(string sourceCode) {
 
         else if (cmd == "ritorno") { (*currentStream) << "return " << content.substr(8) << ";\n"; }
         
-        else if (cmd == "scrivi") { (*currentStream) << "cout << " << content.substr(7) << " << endl;\n"; }
+        else if (cmd == "scrivi") { (*currentStream) << "cout << " << content.substr(7) << ";\n"; }
         
         else if (cmd == "leggi") {
             string varName = words[1];
@@ -259,17 +245,13 @@ string transpile(string sourceCode) {
         }
         
         else if (cmd == "altrimenti") {
-
              if (words.size() >= 2 && words[1] == "se") {
-
                  size_t sePos = content.find("se");
                  string cond = content.substr(sePos + 2); 
                  (*currentStream) << "else if (" << cond << ") {\n";
              } else {
-
                  (*currentStream) << "else {\n";
              }
-
              blockStack.push(GENERIC_BLOCK);
         }
         
@@ -279,44 +261,36 @@ string transpile(string sourceCode) {
              (*currentStream) << "while (" << cond << ") {\n";
         }
         
-
         else if (content.find("=") != string::npos) {
             size_t eqPos = content.find("=");
             string leftSide = content.substr(0, eqPos);
-
             leftSide.erase(remove(leftSide.begin(), leftSide.end(), ' '), leftSide.end());
             
             string rightSide = content.substr(eqPos + 1);
             size_t firstCharR = rightSide.find_first_not_of(' ');
             bool rightIsArrayLiteral = (firstCharR != string::npos && rightSide[firstCharR] == '[');
 
-
             if (leftSide.find('[') != string::npos) {
                  (*currentStream) << content << ";\n";
             }
-
             else if (rightIsArrayLiteral) {
                 replace(rightSide.begin(), rightSide.end(), '[', '{');
                 replace(rightSide.begin(), rightSide.end(), ']', '}');
                 string type = (rightSide.find('"') != string::npos) ? "vector<string>" : "vector<int>";
                 
-
                 bool isGlobalOrFunction = (blockStack.empty() || blockStack.top() != CLASS_BLOCK);
 
                 if (declared_variables.find(leftSide) == declared_variables.end() && isGlobalOrFunction) {
                     (*currentStream) << type << " " << leftSide << " = " << rightSide << ";\n";
                     declared_variables.insert(leftSide);
                 } else {
-                     // Se membro classe o già dichiarato
                      if (!blockStack.empty() && blockStack.top() == CLASS_BLOCK) 
                         (*currentStream) << type << " " << leftSide << " = " << rightSide << ";\n";
                      else 
                         (*currentStream) << leftSide << " = " << rightSide << ";\n";
                 }
             }
-
             else {
-                // FIX: Se c'è un punto (es: r1.id), è un accesso a membro, NON mette auto
                 if (leftSide.find('.') != string::npos) {
                      (*currentStream) << content << ";\n";
                 }
@@ -324,11 +298,9 @@ string transpile(string sourceCode) {
                     bool isNew = (declared_variables.find(leftSide) == declared_variables.end());
                     
                     if (!blockStack.empty() && blockStack.top() == CLASS_BLOCK) {
-
                         string type = inferType(rightSide);
                         (*currentStream) << type << " " << content << ";\n";
                     } else {
-
                         if (isNew) {
                             (*currentStream) << "auto " << content << ";\n";
                             declared_variables.insert(leftSide);
@@ -339,7 +311,6 @@ string transpile(string sourceCode) {
                 }
             }
         }
-
         else {
             if (module_gui_active && (content.find("gui.") == 0)) {
                  string temp = content;
@@ -371,11 +342,9 @@ string transpile(string sourceCode) {
     return finalCpp.str();
 }
 
-
 int main(int argc, char* argv[]) {
-
     if (argc < 2) {
-        cout << "\n=== LUCE COMPILER v1.0 ===" << endl;
+        cout << "\n=== LUCE COMPILER v1.1.0 ===" << endl;
         cout << "Utilizzo: luce <comando> [file]" << endl;
         cout << "\nComandi disponibili:" << endl;
         cout << "  run <file.luce>    : Compila ed esegue il file specificato" << endl;
@@ -385,7 +354,6 @@ int main(int argc, char* argv[]) {
     }
 
     string cmd = argv[1];
-
 
     if (cmd == "docs") {
         ofstream doc("manuale_luce.txt");
@@ -479,7 +447,6 @@ mentre win.aperta():
         cout << "Aprilo per imparare a programmare in Luce!" << endl;
         return 0;
     }
-
 
     if (cmd == "run") {
         if (argc < 3) {
