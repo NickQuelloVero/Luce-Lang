@@ -1,0 +1,40 @@
+scrivi "Verifica Successione di Padovan"
+scrivi "Inserisci un numero intero positivo:"
+leggi n
+
+se n < 1:
+    scrivi "Errore: Il numero deve essere positivo."
+
+altrimenti:
+    trovato = false
+
+    # Inizializziamo i primi tre termini: 1, 1, 1
+    # a = P(n-3)
+    # b = P(n-2)
+    # c = P(n-1) -> L'ultimo calcolato
+    a = 1
+    b = 1
+    c = 1
+
+    # Se l'utente inserisce 1, è immediatamente vero
+    se n == 1:
+        trovato = true
+
+    # Genero la successione finché l'ultimo numero (c) è minore di n
+    mentre c < n:
+        # Calcolo il prossimo valore: P(n) = P(n-2) + P(n-3)
+	# NUOVO DA ERRORE! USO NUOVO TO-FIX!
+        nuova = a + b
+        
+        a = b
+        b = c
+        c = nuova
+        
+        # Controllo se il nuovo numero corrisponde all'input
+        se c == n:
+            trovato = true
+
+    se trovato == true:
+        scrivi "Sì, il numero APPARTIENE alla successione di Padovan."
+    altrimenti:
+        scrivi "No, il numero NON appartiene alla successione di Padovan."
