@@ -1,74 +1,123 @@
-# 💡 Luce-Lang 💡
-<div align="center">
+# 💡 Luce-Lang
 
-  <img src="logo.png" alt="Luce Logo" width="320" height="320" />
+<div align="center">
+  <img src="logo.png" alt="Luce Logo" width="250" height="250" />
+  
+  <br>
+
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/NickQuelloVero/Luce-Lang/graphs/commit-activity)
+  [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows-blue)](https://github.com/NickQuelloVero/Luce-Lang)
+
+  <p align="center">
+    <b>Un linguaggio di programmazione Open-Source veloce come C++, semplice come Python.</b>
+  </p>
 </div>
 
-## Introduzione
+---
 
-Luce-Lang è un linguaggio di programmazione moderno progettato per offrire sintassi chiara, prestazioni elevate e una piattaforma flessibile per lo sviluppo di applicazioni. Il progetto punta a combinare facilità d’uso, modularità e capacità di estensione, rendendo Luce-Lang adatto sia a sviluppatori principianti che a professionisti che necessitano di un linguaggio affidabile e scalabile.
+## 📖 Introduzione
 
-## Installazione
+**Luce-Lang** è un linguaggio di programmazione moderno progettato per offrire una **sintassi chiara**, prestazioni elevate e una piattaforma flessibile per imparare.
 
-L’installazione di Luce-Lang è semplice e supporta diversi ambienti. Segui questi passaggi per installare il linguaggio sul tuo sistema:
-### LINUX
-- Clona il repository ufficiale:
-  ```bash
-  git clone https://github.com/NickQuelloVero/Luce-Lang.git
-  ```
-- Accedi alla directory del progetto e compila con GCC:
-  ```bash
-  cd Luce-Lang
-  g++ src/luce.cpp -o bin/luce
-  ```
-- Per eseguire il compilatore o l’interprete, utilizza il comando:
-  ```bash
-  luce
-  ```
-### WINDOWS
-- Scarica l'ultima release e segui l'installer.
-## Utilizzo
+Il progetto punta a combinare facilità d’uso, modularità e capacità di estensione. Grazie alla sua sintassi intuitiva (spesso basata sull'italiano), Luce-Lang è adatto sia a **sviluppatori principianti** che vogliono imparare le basi della logica, sia a **professionisti** che necessitano di un linguaggio affidabile e scalabile.
 
-Luce-Lang offre una sintassi intuitiva e permette di scrivere, compilare ed eseguire script in modo rapido. Ecco alcune operazioni comuni:
+---
 
-- Per eseguire uno script scritto in Luce-Lang:
+## ⚙️ Installazione
+
+L’installazione di Luce-Lang è semplice e supporta diversi ambienti. Segui questi passaggi per configurare il linguaggio sul tuo sistema.
+
+###  Linux
+
+1.  **Clona il repository ufficiale:**
+    ```bash
+    git clone https://github.com/NickQuelloVero/Luce-Lang.git
+    ```
+
+2.  **Compila il sorgente:**
+    Accedi alla directory e compila utilizzando GCC (assicurati di avere `g++` installato).
+    ```bash
+    cd Luce-Lang
+    mkdir -p bin
+    g++ src/luce.cpp -o bin/luce
+    ```
+
+3.  **Esegui:**
+    Per avviare il compilatore o l’interprete:
+    ```bash
+    ./bin/luce
+    ```
+
+###  Windows
+
+1.  Scarica l'ultima release dalla sezione **Releases** di GitHub.
+2.  Esegui l'installer `.exe` e segui le istruzioni a schermo.
+
+---
+
+## 🚀 Utilizzo
+
+Luce-Lang offre una sintassi intuitiva e permette di scrivere, compilare ed eseguire script in modo rapido.
+
+### Comandi Base
+
+- **Eseguire uno script:**
   ```bash
   luce run path/to/script.luce
   ```
-- Per vedere l’output di esempio, crea un file `esempio.luce` con il seguente contenuto:
-  ```luce
+
+- **Hello World:**
+  Crea un file chiamato `esempio.luce` con il seguente contenuto:
+  ```javascript
   scrivi "Ciao, Luce!"
   ```
   Poi eseguilo:
   ```bash
   luce run esempio.luce
   ```
-- Il linguaggio supporta funzioni, strutture di controllo, e la gestione di variabili. Consulta la documentazione del linguaggio con luce docs per conoscere tutte le funzionalità implementate.
 
-### Flusso di lavoro tipico
+- **Documentazione:**
+  Consulta la documentazione integrata per conoscere tutte le funzionalità:
+  ```bash
+  luce docs
+  ```
+
+### 🔄 Flusso di Lavoro 
 
 ```mermaid
-flowchart TD
-    A[Scrivi codice Luce-Lang] --> B[Salva come .luce]
-    B --> C[Esegui con luce run]
-    C --> D[Visualizza output o errori]
+flowchart LR
+    A[📝 Scrivi codice .luce] --> B{Salva File}
+    B --> C[⚙️ Esegui con 'luce run']
+    C --> D[🖥️ Visualizza Output]
+    C --> E[⚠️ Gestione Errori]
 ```
-
-### Esempio di codice
-
-```luce
-scrivi "Scrivi la tua eta: "
-leggi eta
-se eta >= 18:
-    scrivi "Puoi bere!!!"
-altrimenti:
-    scrivi "Non puoi bere!!!"  
-```
-
-## Licenza
-
-Questo progetto è distribuito sotto licenza MIT. Puoi utilizzarlo, modificarlo e ridistribuirlo liberamente, sia per uso personale che commerciale. Consulta il file `LICENSE` per il testo completo della licenza.
 
 ---
 
-Creato da Nicolò Morinelli
+## 💻 Esempio di Codice
+
+Ecco un esempio pratico che mostra l'input utente e le strutture di controllo in Luce-Lang:
+
+```javascript
+scrivi "Scrivi la tua età: "
+leggi eta
+
+se eta >= 18:
+    scrivi "Puoi bere!"
+altrimenti:
+    scrivi "Non puoi bere!"  
+```
+
+---
+
+## 📄 Licenza
+
+Questo progetto è distribuito sotto licenza **MIT**.
+Puoi utilizzarlo, modificarlo e ridistribuirlo liberamente, sia per uso personale che commerciale. Consulta il file `LICENSE` per il testo completo della licenza.
+
+---
+
+<div align="center">
+  Creato da <b>Nicolò Morinelli</b>
+</div>
